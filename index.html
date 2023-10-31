@@ -64,6 +64,28 @@
     }
     ffhq_radioButtons[0].click()
 
+    // update img src when choose other dataset, ffhq composition
+    const lssd_seg_cfg_radioButtons = document.querySelectorAll('input[name="lssd-seg-cfg"]')
+    for (const radioButton of lssd_seg_cfg_radioButtons) {
+      radioButton.addEventListener('change', show)
+      function show() {
+        let assetUrl = new URL('./static/images/real-world/' + radioButton.value + '.jpeg', import.meta.url)
+        document.getElementById('lssd-seg-cfg').src = assetUrl
+      }
+    }
+    lssd_seg_cfg_radioButtons[0].click()
+
+    // update img src when choose other dataset, ffhq composition
+    const lssd_samples_radioButtons = document.querySelectorAll('input[name="lssd-generation"]')
+    for (const radioButton of lssd_samples_radioButtons) {
+      radioButton.addEventListener('change', show)
+      function show() {
+        let assetUrl = new URL('./static/images/real-world/' + radioButton.value + '.jpeg', import.meta.url)
+        document.getElementById('lssd-generation').src = assetUrl
+      }
+    }
+    lssd_samples_radioButtons[0].click()
+
   </script>
 </head>
 
@@ -116,7 +138,7 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">LSD: Object-Centric Slot Diffusion</h1>
-            <h2 class="title is-3 publication-title">NeurIPS 2023 Spotlight</h2>
+            <h2 class="title is-3 publication-title">NeurIPS 2023 🌟Spotlight🌟</h2>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
                 <a href="https://jindongjiang.me">Jindong Jiang</a><sup>1</sup>,</span>
@@ -208,6 +230,20 @@
       </div>
     </div>
   </section>
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+        <img src="./static/images/real-world/lssd_coco_samples.jpg" alt="teaser" width="100%" />
+        <h2 class="subtitle has-text-centered" style="font-size: 20pt;">
+          By integrating with Pre-Trained Diffusion Models, <span class="dnerf">LSD</span> achieves real-world image object-centric learning and conditional generation.
+        </h2>
+      </div>
+    </div>
+  </section>
 
   <hr>
 
@@ -276,24 +312,19 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p style="font-size: 16pt;">
-              Despite remarkable recent advances, making object-centric learning work for complex natural scenes remains
-              the main challenge.
-              The recent success of adopting the transformer-based image generative model in object-centric learning
-              suggests that having a highly expressive image generator is crucial for dealing with complex scenes.
-              In this paper, inspired by this observation, we aim to answer the following question:
-              <b><i>can we benefit from the other pillar of modern deep generative models, i.e., the diffusion models,
-                  for object-centric learning</i></b> and
-              <b><i>what are the pros and cons of such a model</i></b>?
-              To this end, we propose a new object-centric learning model, Latent Slot Diffusion (LSD).
-              LSD can be seen from two perspectives. From the perspective of object-centric learning, it replaces the
-              conventional slot decoders with a latent diffusion model conditioned on the object slots.
-              Conversely, from the perspective of diffusion models, it is the first unsupervised compositional
-              conditional diffusion model which, unlike traditional diffusion models, does not require supervised
-              annotation such as a text description to learn to compose.
-              In experiments on various object-centric tasks, including the FFHQ dataset for the first time in this line
-              of research, we demonstrate that LSD significantly outperforms the state-of-the-art transformer-based
-              decoder, particularly when the scene is more complex.
-              We also show a superior quality in unsupervised compositional generation.
+              The recent success of transformer-based image generative models in object-centric learning highlights the 
+              importance of powerful image generators for handling complex scenes. However, despite the high expressiveness 
+              of diffusion models in image generation, their integration into object-centric learning remains largely unexplored 
+              in this domain. In this paper, we explore the feasibility and potential of integrating diffusion models into 
+              object-centric learning and investigate the pros and cons of this approach. We introduce Latent Slot Diffusion (LSD), 
+              a novel model that serves dual purposes: <b><i>it is the first object-centric learning model to replace conventional slot 
+              decoders with a latent diffusion model conditioned on object slots</i></b>, and <b><i>it is also the first unsupervised compositional 
+              conditional diffusion model that operates without the need for supervised annotations like text</i></b>. Through experiments 
+              on various object-centric tasks, including the first application of the FFHQ dataset in this field, we demonstrate 
+              that LSD significantly outperforms state-of-the-art transformer-based decoders, particularly in more complex scenes, 
+              and exhibits superior unsupervised compositional generation quality. 
+              In addition, we conduct a preliminary investigation into the integration of <b><i>pre-trained diffusion models</i></b> in LSD 
+              and demonstrate its effectiveness in <b><i>real-world image segmentation and generation</i></b>.
             </p>
           </div>
         </div>
@@ -476,6 +507,87 @@
         </div>
       </div>
       <!-- Face Replacement. -->
+
+      <hr>
+
+      <!-- COCO Object-Centric Learning and Generation. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-max-desktop">
+          <h2 class="title is-3">LSD with Pre-Trained Diffusion Models - Real-World Unsupervised Object-Centric Learning and Conditional Generation</h2>
+          <!-- <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;">Note: Click the button to select a dataset for result visualization.</p>
+            <hr> -->
+          <!-- <div class="task"> -->
+          <p>&nbsp;</p>
+          <div class="columns is-centered" style="position: relative;">
+            <!-- <div class="control has-text-justified" style="position: absolute; left: -10%;"> -->
+            <div class="control has-text-centered">
+              <label class="radio" style="font-size: 20px;">
+                <input value="lssd_seg_cfg_add_1" type="radio" name="lssd-seg-cfg"> Sample 1
+              </label>
+              <!-- <br> -->
+              <label class="radio" style="font-size: 20px;">
+                <input value="lssd_seg_cfg_add_2" type="radio" name="lssd-seg-cfg"> Sample 2
+              </label>
+              <!-- <br> -->
+              <label class="radio" style="font-size: 20px;">
+                <input value="lssd_seg_cfg_add_3" type="radio" name="lssd-seg-cfg"> Sample 3
+              </label>
+              <!-- <br> -->
+            </div>
+          </div>
+          <!-- <p>&nbsp;</p> -->
+          <div id="pose_loading" style="position: absolute; left: 50%; top: 45%;"></div>
+          <img src="./static/images/real-world/lssd_coco_samples_add_1" id="lssd-seg-cfg" width="80%"></img>
+          <!-- </div> -->
+          <p>&nbsp;</p>
+          <h2 class="subtitle has-text-centered" style="font-size: 16pt;">
+            With the strong generative capabilities of pre-trained DMs, LSD can scale up object-centric learning to real-world images and perform 
+            conditional generation. We show generation results with different value of classifier-free guidance.
+          </h2>
+        </div>
+      </div>
+      <!-- COCO Object-Centric Learning and Generation. -->
+
+      <hr>
+
+      <!-- COCO Diverse Image Generation with Unconstrained Real-World Objects. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-max-desktop">
+          <h2 class="title is-3">LSD with Pre-Trained Diffusion Models - Slot-Conditioned Generations with Unconstrained Real-World Objects</h2>
+          <!-- <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;">Note: Click the button to select a dataset for result visualization.</p>
+            <hr> -->
+          <!-- <div class="task"> -->
+          <p>&nbsp;</p>
+          <div class="columns is-centered" style="position: relative;">
+            <!-- <div class="control has-text-justified" style="position: absolute; left: -10%;"> -->
+            <div class="control has-text-centered">
+              <label class="radio" style="font-size: 20px;">
+                <input value="lssd_coco_samples_add_1" type="radio" name="lssd-generation"> Sample 1
+              </label>
+              <!-- <br> -->
+              <label class="radio" style="font-size: 20px;">
+                <input value="lssd_coco_samples_add_2" type="radio" name="lssd-generation"> Sample 2
+              </label>
+              <!-- <br> -->
+              <label class="radio" style="font-size: 20px;">
+                <input value="lssd_coco_samples_add_3" type="radio" name="lssd-generation"> Sample 3
+              </label>
+              <!-- <br> -->
+            </div>
+          </div>
+          <!-- <p>&nbsp;</p> -->
+          <div id="pose_loading" style="position: absolute; left: 50%; top: 45%;"></div>
+          <img src="./static/images/real-world/lssd_coco_samples_add_1" id="lssd-generation" width="80%"></img>
+          <!-- </div> -->
+          <p>&nbsp;</p>
+          <h2 class="subtitle has-text-centered" style="font-size: 16pt;">
+            By applying classifier-free guidance (cfg=1.3) to the learned slots, LSD with pre-trained diffusion models 
+            can generate diverse variations while maintaining semantic consistency across samples. 
+            This also highlights the richness of semantic information encoded in the slots learned by LSD.
+          </h2>
+        </div>
+      </div>
+      <!-- COCO Diverse Image Generation with Unconstrained Real-World Objects. -->
 
     </div>
   </section>
